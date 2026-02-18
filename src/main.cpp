@@ -67,4 +67,13 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
  */
 DHT dht(DHTPIN, DHTTYPE);
 
-
+/**
+ * @brief System initialization routine.
+ *
+ * @details
+ * - Initializes Serial communication at 9600 baud.
+ * - Initializes DHT11 sensor.
+ * - Initializes OLED display.
+ * - Displays startup splash message.
+ * - Halts execution if OLED initialization fails.
+ */
