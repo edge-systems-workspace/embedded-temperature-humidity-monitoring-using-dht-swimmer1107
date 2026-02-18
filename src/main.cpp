@@ -96,3 +96,46 @@ void setup() {
     delay(2000);
 }
 
+
+/**
+ * @brief Main execution loop.
+ *
+ * @details
+ * - Waits 2 seconds (mandatory for DHT11 stability).
+ * - Reads temperature (°C) and humidity (%).
+ * - Validates sensor data.
+ * - Displays readings on OLED.
+ * - Displays error message if reading fails.
+ *
+ * @note DHT11 requires a minimum 2-second interval between reads.
+ */
+void loop() {
+
+    delay(2000);   ///< Required delay for DHT11 sampling rate
+
+    float temp = dht.readTemperature();   ///< Temperature in Celsius
+    float hum  = dht.readHumidity();      ///< Relative humidity percentage
+
+    display.clearDisplay();
+    display.setTextSize(1);
+    display.setCursor(0, 0);
+
+    if (isnan(temp) || isnan(hum)) {
+        display.println("Sensor Error!");
+        display.display();
+        return;
+    }
+
+    display.println("DHT11 Reading");
+    display.println("----------------");
+
+    display.print("Temp: ");
+    display.print(temp);
+    display.println(" C");
+
+    display.print("Humidity: ");
+    display.print(hum);
+    display.println(" %");
+
+    display.display();   ///< Updates OLED buffer to screen
+}
